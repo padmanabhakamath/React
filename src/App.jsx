@@ -16,6 +16,17 @@ function CoreConcepts(props)
   )
 }
 
+export const DUMMY_TODOS = [
+  'Learn React',
+  'Practice React',
+  'Profit!'
+];
+
+
+export function Todo( props ) {
+  return <li>{props.text}</li>;
+}
+
 /**
  * 
  * Exercise for the selective appearance and disappearance of a div
@@ -79,25 +90,36 @@ function App() {
         <section id="core-concepts">
           <h2>Core Concepts</h2>
           <ul>
-            <CoreConcepts {...CORE_CONCEPTS[0]} />
-            <CoreConcepts {...CORE_CONCEPTS[1]} />
-            <CoreConcepts title={CORE_CONCEPTS[2].title}
-              description={CORE_CONCEPTS[2].description}
-              image={CORE_CONCEPTS[2].image}
-            />
-            <CoreConcepts title={CORE_CONCEPTS[3].title}
-              description={CORE_CONCEPTS[3].description}
-              image={CORE_CONCEPTS[3].image}
-            />
+            {CORE_CONCEPTS.map((conceptItem) => (
+              <CoreConcepts key={conceptItem.title} {...conceptItem} />
+            ))}
+            
           </ul>
         </section>
         <section id="examples">
           <h2>Examples</h2>
           <menu>
-            <TabButton onSelect={() => handleSelect('components')}>components</TabButton>
-            <TabButton onSelect={() => handleSelect('jsx')}>jsx</TabButton>
-            <TabButton onSelect={() => handleSelect('props')}>props</TabButton>
-            <TabButton onSelect={() => handleSelect('state')}>state</TabButton>
+            { DUMMY_TODOS.map((todoItem) => (<Todo key={todoItem} text={todoItem} />))}
+            <TabButton isSelected={selectedTopic === 'components'} 
+              onSelect={() => handleSelect('components')}
+              >
+              components
+            </TabButton>
+            <TabButton isSelected={selectedTopic === 'jsx'} 
+              onSelect={() => handleSelect('jsx')}
+              >
+              jsx
+            </TabButton>
+            <TabButton isSelected={selectedTopic === 'props'} 
+              onSelect={() => handleSelect('props')}
+              >
+              props
+            </TabButton>
+            <TabButton isSelected={selectedTopic === 'state'} 
+              onSelect={() => handleSelect('state')}
+              >
+              state
+            </TabButton>
           </menu>
           {tabContent}
         </section>
