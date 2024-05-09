@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { EXAMPLES } from "../data";
 import TabButton from "./TabButton";
+import Tabs from "./Tabs";
+import Section from "./Section";
 
 export const DUMMY_TODOS = [
     'Learn React',
@@ -41,33 +43,36 @@ export  default function Examples() {
   }
 
     return  (
-        <section id="examples">
-        <h2>Examples</h2>
-        <menu>
-          { DUMMY_TODOS.map((todoItem) => (<Todo key={todoItem} text={todoItem} />))}
-          <TabButton isSelected={selectedTopic === 'components'} 
-            onSelect={() => handleSelect('components')}
-            >
-            components
-          </TabButton>
-          <TabButton isSelected={selectedTopic === 'jsx'} 
-            onSelect={() => handleSelect('jsx')}
-            >
-            jsx
-          </TabButton>
-          <TabButton isSelected={selectedTopic === 'props'} 
-            onSelect={() => handleSelect('props')}
-            >
-            props
-          </TabButton>
-          <TabButton isSelected={selectedTopic === 'state'} 
-            onSelect={() => handleSelect('state')}
-            >
-            state
-          </TabButton>
-        </menu>
-        {tabContent}
-      </section>
+        <Section title="Example" id="examples">  
+        <Tabs           
+          buttons = {
+            <>
+              <TabButton isSelected={selectedTopic === 'components'} 
+                onClick={() => handleSelect('components')}
+                >
+                components
+              </TabButton>
+              <TabButton isSelected={selectedTopic === 'jsx'} 
+                onClick={() => handleSelect('jsx')}
+                >
+                jsx
+              </TabButton>
+              <TabButton isSelected={selectedTopic === 'props'} 
+                onClick={() => handleSelect('props')}
+                >
+                props
+              </TabButton>
+              <TabButton isSelected={selectedTopic === 'state'} 
+                onClick={() => handleSelect('state')}
+                >
+                state
+              </TabButton>
+          </>
+
+        }>
+          {tabContent}
+          </Tabs>      
+      </Section>
     );
 
 }
